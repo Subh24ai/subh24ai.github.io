@@ -1,0 +1,759 @@
+/* === Variables & Basic Reset === */
+:root {
+    --primary: #2563eb;       /* Blue */
+    --primary-dark: #1d4ed8;  /* Darker Blue */
+    --secondary: #f0f9ff;     /* Very Light Blue */
+    --dark: #0f172a;          /* Very Dark Blue/Black */
+    --light: #f8fafc;         /* Almost White */
+    --gray: #64748b;          /* Medium Gray */
+    --light-gray: #e2e8f0;    /* Light Gray */
+    --white: #ffffff;
+    --header-height: 70px; /* Adjust as needed */
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+    scroll-padding-top: var(--header-height); /* Offset for fixed header */
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+ul {
+    list-style: none;
+}
+
+/* === Header & Navigation === */
+header {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 0; /* Padding handled by container and elements */
+    height: var(--header-height);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure header is above other content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--white); /* Ensure logo text is white */
+    text-decoration: none; /* Remove underline from link */
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.main-nav ul {
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-left: 2rem;
+}
+
+.main-nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0; /* Add some vertical padding for easier clicking */
+    position: relative; /* For potential future underline effects */
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a:focus { /* Add focus style */
+    color: var(--primary);
+    outline: none; /* Remove default outline if custom styling is added */
+}
+
+/* === Mobile Navigation === */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001; /* Above header content, below mobile menu itself */
+}
+
+/* Styles for the mobile navigation menu itself (when active) */
+.main-nav.mobile-active {
+    display: block;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--dark);
+    padding: 2rem 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    height: calc(100vh - var(--header-height)); /* Full height minus header */
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+}
+
+.main-nav.mobile-active ul {
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-nav.mobile-active ul li {
+    margin: 1rem 0;
+    margin-left: 0; /* Reset margin for vertical layout */
+}
+
+.main-nav.mobile-active ul li a {
+    font-size: 1.2rem;
+}
+
+
+/* === Hero Section === */
+.hero {
+    padding: calc(6rem + var(--header-height)) 0 6rem; /* Adjust top padding for fixed header */
+    background: linear-gradient(135deg, var(--dark) 0%, #1e3a8a 100%);
+    color: var(--white);
+    min-height: 70vh; /* Ensure it takes up significant viewport height */
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 5px solid var(--primary);
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 0 auto; /* Center image when flex direction changes */
+}
+
+.hero-text {
+    flex: 2;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 3rem); /* Responsive font size */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: var(--light-gray); /* Slightly lighter text on dark background */
+}
+
+/* === Buttons === */
+.btn {
+    display: inline-block;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem; /* Add space for wrapping buttons */
+    border: 2px solid var(--primary); /* Add border for consistency */
+}
+
+.btn:hover, .btn:focus {
+    background-color: var(--primary-dark);
+    color: var(--white); /* Ensure text color remains white */
+    transform: translateY(-2px);
+    outline: none; /* Remove default focus outline if desired */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--white); /* Text color for hero section */
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover, .btn-outline:focus {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+/* Outline button specific styles for non-hero sections if needed */
+section:not(.hero) .btn-outline {
+    color: var(--primary); /* Adjust color for light backgrounds */
+}
+
+section:not(.hero) .btn-outline:hover,
+section:not(.hero) .btn-outline:focus {
+    color: var(--white);
+}
+
+/* === Social Links === */
+.social-links {
+    display: flex;
+    gap: 1.5rem; /* Increased gap */
+    margin-top: 2rem;
+}
+
+.social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover, .social-links a:focus {
+    color: var(--primary);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+/* === General Section Styling === */
+section {
+    padding: 5rem 0;
+    overflow: hidden; /* Contain animations */
+}
+
+section:nth-child(odd) { /* Alternate background slightly */
+   /* background-color: var(--white); */ /* Keeping it light for now */
+}
+
+section h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem); /* Responsive font size */
+    margin-bottom: 4rem; /* Increased margin */
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem; /* Increased distance */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px; /* Slightly shorter */
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+}
+
+/* === Skills Section === */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.skill-category {
+    flex: 1 1 300px; /* Flex basis 300px, allow growth/shrink */
+    max-width: 450px; /* Max width for larger screens */
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--primary); /* Add accent border */
+}
+
+.skill-category:hover {
+    transform: translateY(-5px) scale(1.02); /* Slightly more noticeable hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category h3 {
+    font-size: 1.4rem; /* Slightly smaller */
+    margin-bottom: 1.5rem;
+    color: var(--primary-dark); /* Darker primary color */
+    font-weight: 600;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.skill-tag {
+    background-color: var(--secondary);
+    color: var(--primary-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.skill-tag:hover {
+     background-color: var(--primary);
+     color: var(--white);
+}
+
+/* === Experience & Projects Sections === */
+.experience-container, .projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Increased gap */
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.experience-item, .project-item {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Needed for pseudo-element */
+}
+
+.experience-item:hover, .project-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Vertical line accent */
+.experience-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px; /* Thicker */
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 10px 0 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.experience-item:hover::before {
+    transform: scaleY(1.05); /* Slight grow effect on hover */
+}
+
+.experience-header, .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items top */
+    margin-bottom: 1rem;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 0.5rem; /* Gap between title/date when wrapping */
+}
+
+.experience-title, .project-title {
+    font-size: 1.4rem; /* Slightly adjusted size */
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.experience-company, .project-description {
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 0.5rem; /* Space below company/description */
+}
+
+.experience-date {
+    color: var(--gray);
+    font-weight: 500;
+    font-size: 0.9rem; /* Slightly smaller */
+    white-space: nowrap; /* Prevent date from breaking */
+    margin-left: 1rem; /* Add space if on same line */
+}
+
+.experience-description, .project-details {
+    margin-top: 1rem;
+    color: var(--gray); /* Make list text gray */
+}
+
+.experience-description ul, .project-details ul {
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.experience-description ul li, .project-details ul li {
+    margin-bottom: 0.7rem; /* Increased spacing */
+    position: relative; /* For custom bullet */
+    padding-left: 0.5rem; /* Space for custom bullet */
+}
+/* Custom bullet point */
+.experience-description ul li::before,
+.project-details ul li::before {
+    content: '•';
+    color: var(--primary);
+    font-weight: bold;
+    position: absolute;
+    left: -1rem;
+    top: 0;
+}
+
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap; /* Allow links to wrap */
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 0.3rem 0; /* Add slight padding */
+}
+
+.project-links a:hover, .project-links a:focus {
+    color: var(--primary-dark);
+    transform: translateX(3px);
+    outline: none;
+}
+
+.project-links a i {
+    transition: transform 0.3s ease;
+}
+
+.project-links a:hover i, .project-links a:focus i {
+    transform: rotate(5deg); /* Slight icon tilt */
+}
+
+/* === Achievements Section === */
+#achievements { /* Specific section styling */
+     background-color: var(--secondary);
+}
+.achievements-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center; /* Center items horizontally */
+}
+
+.achievement-item {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    /* width: calc(50% - 1rem); */ /* Let flexbox handle width */
+    flex: 1 1 350px; /* Flex basis 350px */
+    max-width: 500px; /* Max width */
+    min-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--primary); /* Consistent accent */
+}
+
+.achievement-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.achievement-item p {
+    color: var(--gray);
+    font-size: 0.95rem; /* Slightly larger */
+}
+.achievement-item p:last-of-type { /* Style the date differently */
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+
+/* === Contact Section & Footer === */
+#contact {
+    background-color: var(--light); /* Ensure light background */
+}
+
+.footer-content {
+    max-width: 700px; /* Slightly wider */
+    margin: 0 auto;
+    text-align: center;
+}
+
+#contact h2 { /* Center the contact heading */
+    text-align: center;
+}
+
+.footer-content > p { /* Paragraph directly inside footer-content */
+    margin-bottom: 2.5rem; /* More space before contact details */
+    font-size: 1.1rem;
+    color: var(--gray);
+}
+
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Increased gap */
+    color: var(--dark);
+    font-size: 1rem;
+}
+
+.contact-item i {
+    color: var(--primary);
+    font-size: 1.2rem; /* Slightly larger icon */
+}
+
+.contact-item a { /* Style links within contact items */
+     color: var(--dark);
+     font-weight: 500;
+     transition: color 0.3s ease;
+}
+.contact-item a:hover, .contact-item a:focus {
+    color: var(--primary);
+    outline: none;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2.5rem 0; /* More margin */
+}
+
+.footer-social a {
+    color: var(--dark); /* Dark icons for light background */
+    font-size: 1.8rem; /* Larger icons */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover, .footer-social a:focus {
+    color: var(--primary);
+    transform: translateY(-4px) scale(1.1); /* More pronounced hover effect */
+    outline: none;
+}
+
+footer { /* The final footer bar */
+    background-color: var(--dark);
+    color: var(--gray); /* Lighter text for copyright */
+    padding: 2rem 0; /* Reduced padding */
+    text-align: center;
+    margin-top: 3rem; /* Space above footer bar */
+}
+
+.copyright {
+    /* margin-top: 2rem; Remove top margin, handled by footer padding */
+    font-size: 0.9rem;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+.animate-slide-in { animation: slideInFromLeft 0.8s ease-out forwards; }
+.hero-image.animate-fade-in { animation: fadeIn 1s ease-out 0.2s forwards; opacity: 0; } /* Delay image slightly */
+
+
+/* Apply scroll animations */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* === Responsive Styles === */
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem; /* Reduced gap for column layout */
+    }
+
+    .hero-text {
+        order: 2; /* Text below image */
+    }
+    .hero-image {
+        order: 1; /* Image above text */
+        margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+        margin: 0 auto 2rem; /* Center paragraph */
+    }
+
+    .social-links {
+        justify-content: center; /* Center social links */
+    }
+
+    .experience-header {
+         flex-direction: column; /* Stack title/company and date */
+         align-items: flex-start; /* Align left */
+    }
+     .experience-date {
+         margin-left: 0; /* Remove margin when stacked */
+         margin-top: 0.3rem;
+     }
+
+     .achievements-container {
+         justify-content: flex-start; /* Align items left on smaller screens */
+     }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    .main-nav {
+        display: none; /* Hide desktop nav */
+        /* Mobile nav styles are handled by .mobile-active class */
+    }
+
+    .mobile-nav-toggle {
+        display: block; /* Show hamburger button */
+    }
+
+    .hero {
+        padding-top: calc(4rem + var(--header-height)); /* Adjust padding */
+        padding-bottom: 4rem;
+    }
+
+    h1 {
+        font-size: 2.2rem; /* Adjust heading size */
+    }
+    .hero-text p {
+        font-size: 1.1rem;
+    }
+
+    section h2 {
+        font-size: 1.8rem; /* Adjust section heading size */
+    }
+
+    .container {
+        padding: 0 1rem; /* Reduce container padding */
+    }
+
+    .skill-category {
+        flex-basis: 100%; /* Full width skill categories */
+        max-width: 100%;
+    }
+
+    .achievement-item {
+        flex-basis: 100%; /* Full width achievements */
+        max-width: 100%;
+    }
+
+    .contact-info {
+        flex-direction: column; /* Stack contact items */
+        align-items: center; /* Center items when stacked */
+        gap: 1rem; /* Reduce gap */
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+     .hero-image img {
+         width: 250px;
+         height: 250px;
+     }
+
+     .btn {
+         padding: 0.7rem 1.2rem;
+         font-size: 0.9rem;
+     }
+     .project-links {
+        flex-direction: column; /* Stack project links */
+        align-items: flex-start; /* Align left */
+        gap: 0.5rem;
+     }
+}
