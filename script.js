@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'AI Engineer',
         'LLM Specialist',
         'RAG Systems Builder',
-        'Machine Learning Developer',
-        'Python Developer' // Added another example
+        'NLP Engineer',
+        'Agentic AI Engineer' // Added another example
     ];
 
     // --- Core Elements Cache ---
